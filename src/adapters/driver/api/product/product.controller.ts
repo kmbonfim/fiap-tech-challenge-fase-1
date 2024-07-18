@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
-import { CreateProductDto, ProductCategory } from './dtos/create-product.dto';
+import { CreateProductDto } from './dtos/create-product.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ProductCategoryValue } from 'src/core/domain/value-objects/product-category';
 
 @ApiTags('product')
 @Controller('product')
@@ -11,8 +12,8 @@ export class ProductController {
   }
 
   @Get()
-  @ApiQuery({ name: 'category', enum: ['beverage', 'side-dish'] })
-  find(@Query('category') category: ProductCategory) {
+  @ApiQuery({ name: 'category', enum: ProductCategoryValue })
+  find(@Query('category') category: ProductCategoryValue) {
     return 'This action returns all products: ' + category;
   }
 
