@@ -1,6 +1,8 @@
 import { Customer } from "src/core/domain/customer";
 import { Customer as PrismaCustomer } from "@prisma/client";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class CustomerMapper {
   toPersistence(customer: Customer) {
     return {
