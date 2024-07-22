@@ -2,13 +2,16 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/
 import { CreateProductDto } from './dtos/create-product.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { ProductCategoryValue } from 'src/core/domain/value-objects/product-category';
+import { ProductService } from 'src/core/application/services/product/product.service';
 
 @ApiTags('product')
 @Controller('product')
 export class ProductController {
+  constructor(private productService: ProductService) {}
+
   @Post()
-  create(@Body() createProductDto: CreateProductDto) {
-    return 'This action adds a new product: ' + JSON.stringify(createProductDto);
+  async create(@Body() createProductDto: CreateProductDto) {
+    return await this.productService.create(createProductDto);
   }
 
   @Get()

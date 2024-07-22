@@ -24,21 +24,44 @@ model Customer {
 }
 
 model Order {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  customer   Customer  @relation(fields: [customerId], references: [id])
-  customerId String    @db.ObjectId
+  id         String         @id @default(auto()) @map("_id") @db.ObjectId
+  customer   Customer       @relation(fields: [customerId], references: [id])
+  customerId String         @db.ObjectId
   total      Float
-  products   Product[]
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+  products   OrderProduct[]
+  status     OrderStatus
+}
+
+type OrderProduct {
+  name        String
+  price       Float
+  description String
+  category    ProductCategory
+  quantity    Int
 }
 
 model Product {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  price     Float
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Order     Order?   @relation(fields: [orderId], references: [id])
-  orderId   String?  @db.ObjectId
+  id           String          @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  price        Float
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  description  String
+  category     ProductCategory
+}
+
+enum ProductCategory {
+  Food
+  Beverage
+  Snack
+  Dessert
+}
+
+enum OrderStatus {
+  Received
+  Preparing
+  Ready
+  Finished
 }

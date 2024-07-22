@@ -4,6 +4,7 @@ import { PersistenceProductModule } from 'src/adapters/driven/persistence/produc
 
 @Module({
   imports: [PersistenceProductModule],
-  providers: [ProductService]
+  providers: [ProductService],
+  exports: [ProductService]
 })
 export class ProductModule {}
