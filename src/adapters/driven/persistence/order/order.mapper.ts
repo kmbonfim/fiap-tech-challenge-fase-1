@@ -17,7 +17,10 @@ export class OrderMapper {
   toPersistence(order: Order | NotPersistedOrder) {
     return {
       customerId: order.customer.id,
-      products: order.products.map(product => ({ ...product, category: product.category.getValue() })),
+      products: order.products.map(product => ({
+        ...product,
+        category: product.category.getValue()
+      })),
       total: order.total,
       status: order.status.getValue()
     }
@@ -29,7 +32,10 @@ export class OrderMapper {
       createdAt: order.createdAt,
       updatedAt: order.updatedAt,
       customer: order.customer,
-      products: order.products.map(product => ({ ...product, category: new ProductCategory(ProductCategoryValue[product.category]) })),
+      products: order.products.map(product => ({
+        ...product,
+        category: new ProductCategory(ProductCategoryValue[product.category])
+      })),
       total: order.total,
       status: OrderStatusValue[order.status]
     })
