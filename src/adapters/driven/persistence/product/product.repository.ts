@@ -4,6 +4,7 @@ import { NotPersistedProduct, Product } from 'src/core/domain/product';
 import { ProductCategoryValue } from 'src/core/domain/value-objects/product-category';
 import { PrismaService } from '../prisma.service';
 import { ProductMapper } from './product.mapper';
+import { NotFoundError } from '../../../../core/application/errors/not-found.error';
 
 @Injectable()
 export class PrismaProductRepository implements ProductRepository {
@@ -45,11 +46,16 @@ export class PrismaProductRepository implements ProductRepository {
   }
 
   async delete(id: string) {
-    await this.prismaService.product.delete({
-      where: {
-        id
-      }
-    })
+    try {
+      await this.prismaService.product.delete({
+        where: {
+          id
+        }
+      })
+    } catch (error) {
+      if (error.code === 'P2025') throw new NotFoundError();
+      throw error;
+    }
   }
 
   async update(id: string, product: Product) {

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ProductController } from './product.controller';
-import { ProductModule } from 'src/core/application/services/product/product.module';
+import { ApplicationProductModule } from 'src/core/application/services/product/application.product.module';
 
 @Module({
-  imports: [ProductModule],
+  imports: [ApplicationProductModule],
   controllers: [ProductController]
 })
 export class ApiProductModule {}

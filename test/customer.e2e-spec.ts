@@ -1,6 +1,6 @@
 import { INestApplication } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
-import { CustomerModule } from "src/adapters/driver/api/customer/customer.module";
+import { ApiCustomerModule } from "src/adapters/driver/api/customer/api.customer.module";
 import * as request from 'supertest';
 import { PrismaClient } from '@prisma/client'
 import { MongoMemoryReplSet } from 'mongodb-memory-server-core';
@@ -28,7 +28,7 @@ describe('Customer', () => {
     });
 
     const moduleRef = await Test.createTestingModule({ 
-      imports: [CustomerModule]
+      imports: [ApiCustomerModule]
     })
       .overrideProvider(PrismaService)
       .useValue(prisma)
