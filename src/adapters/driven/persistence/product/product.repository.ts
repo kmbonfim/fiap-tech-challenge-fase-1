@@ -68,6 +68,7 @@ export class PrismaProductRepository implements ProductRepository {
         id
       }
     })
+    if (!persistedProduct) return null;
     return this.productMapper.fromPersistence(persistedProduct)
   }
 }

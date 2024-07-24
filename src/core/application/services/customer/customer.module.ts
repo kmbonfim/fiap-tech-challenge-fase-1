@@ -4,6 +4,7 @@ import { PersistenceCustomerModule } from 'src/adapters/driven/persistence/custo
 
 @Module({
   imports: [PersistenceCustomerModule],
-  providers: [CustomerService]
+  providers: [CustomerService],
+  exports: [CustomerService]
 })
 export class CustomerModule {}

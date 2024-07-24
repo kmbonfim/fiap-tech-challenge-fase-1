@@ -29,6 +29,17 @@ export class PrismaCustomerRepository implements CustomerRepository {
         document
       }
     });
+    if (!persistedCustomer) return null;
+    return this.customerMapper.fromPersistence(persistedCustomer);
+  }
+
+  async findByID(id: string) {
+    const persistedCustomer = await this.prismaService.customer.findUnique({
+      where: {
+        id
+      }
+    });
+    if (!persistedCustomer) return null
     return this.customerMapper.fromPersistence(persistedCustomer);
   }
 }

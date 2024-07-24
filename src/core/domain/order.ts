@@ -12,12 +12,12 @@ type OrderProduct = {
 }
 
 class _Order<T extends PersistedEntity | NotPersistedEntity = PersistedEntity> extends Entity<T> {
-  customer?: Customer;
+  customer: Customer | null;
   products: OrderProduct[];
   total: number;
   status: OrderStatus;
 
-  constructor(order: { customer?: Customer; products: OrderProduct[]; status: OrderStatusValue; total: number } & T) {
+  constructor(order: { customer: Customer | null; products: OrderProduct[]; status: OrderStatusValue; total: number } & T) {
     super(order);
     this.customer = order.customer;
     this.products = order.products;
