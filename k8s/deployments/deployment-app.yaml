@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: app-lanchonete-fiap
 spec:
-  replicas: 3
   selector:
     matchLabels:
       app: app-lanchonete-fiap
@@ -15,6 +14,11 @@ spec:
       containers:
         - name: app-lanchonete-fiap-container
           image: wagnersanches/app-lanchonete-fiap
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
           livenessProbe:
             httpGet:
               path: /health
